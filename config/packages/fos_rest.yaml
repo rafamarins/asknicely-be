@@ -1,0 +1,26 @@
+# Read the documentation: https://fosrestbundle.readthedocs.io/en/3.x/
+fos_rest:
+    serializer:
+        serialize_null: true
+    body_listener:
+        enabled: true
+        throw_exception_on_unsupported_content_type:  true
+        decoders:
+            json: fos_rest.decoder.json
+    format_listener:
+        rules:
+            - { path: ^/api, prefer_extension: false, fallback_format: json, priorities: [ json, html ] }
+services:
+    fos_rest.decoder.json:
+        class: FOS\RestBundle\Decoder\JsonDecoder
+        public: true
+#    param_fetcher_listener:  true
+#    allowed_methods_listener:  true
+    # routing_loader: false
+#    view:
+#        view_response_listener:  true
+#    exception:
+#        codes:
+#            App\Exception\MyException: 403
+#        messages:
+#            App\Exception\MyException: Forbidden area.
